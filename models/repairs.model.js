@@ -1,5 +1,5 @@
 //importamos el archivo db de la caperta utils
-const { db } = require('../utils/dataBase');
+const { db } = require('../utils/database');
 
 //DataTypes(esto para que este valor puede ser leido en cualquier base de datos )
 const { DataTypes } = require('sequelize');
