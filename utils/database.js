@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize'); // importamos la libreria Sequelize
+const Sequelize = require('sequelize'); // importamos la libreria Sequelize
 const dotenv = require('dotenv'); // importamos la libreria dotenv para hacer variables de entorno
 
 dotenv.config({ path: './config.env' });
