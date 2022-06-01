@@ -18,12 +18,12 @@ app.use(cors());
 // app.use(express.static())
 
 // habilitar pug
-app.set("view engine", "pug")
+app.set('view engine', 'pug');
 
 //Routers
 const { userRouter } = require('./router/user.routes');
 const { repairsRouter } = require('./router/repairs.routes');
-const { viewRouter } = require("./router/views.routes")
+const { viewRouter } = require('./router/views.routes');
 
 //Habilitar datos JSON entrantes
 app.use(express.json());
@@ -54,8 +54,8 @@ const limiter = rateLimit({
 app.use(limiter); // estamos la escucha las const limiter
 
 // Endpoints
-app.use("/", viewRouter)
-app.use("/api/v1/users", userRouter);
+app.use('/', viewRouter);
+app.use('/api/v1/users', userRouter);
 app.use('/api/v1/repairs', repairsRouter);
 
 //escucha de mis error globales

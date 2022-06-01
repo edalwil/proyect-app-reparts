@@ -8,16 +8,27 @@ class Email {
     this.to = to;
   }
 
+  // creat una conexion con un email servicio
   createTransport() {
     return nodemailer.createTransport({
-      host: 'smtp.mailtrap.io',
-      port: 2525,
+      service: 'SendGrid',
       auth: {
-        user: process.env.MAILTRAP_USER,
-        pass: process.env.MAILTRAP_PASS,
+        user: 'apiKey',
+        pass: process.env.SENDGRID_API_KEY,
       },
     });
   }
+
+  // createTransport() {
+  //   return nodemailer.createTransport({
+  //     host: 'smtp.mailtrap.io',
+  //     port: 2525,
+  //     auth: {
+  //       user: process.env.MAILTRAP_USER,
+  //       pass: process.env.MAILTRAP_PASS,
+  //     },
+  //   });
+  // }
 
   //envia el correo
   async send(template, subject, emailData) {
@@ -26,7 +37,7 @@ class Email {
     });
 
     await this.createTransport().sendMail({
-      from: 'soporte-app-reapair@gmail.',
+      from: 'edalwil@gmail.com',
       to: this.to,
       subject,
       html,
