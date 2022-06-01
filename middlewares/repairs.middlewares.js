@@ -12,7 +12,7 @@ const repairsExists = async (req, res, next) => {
 
     const repairs = await Repairs.findOne({
       where: { id },
-      include: [{ model: User }],
+      include: [{ model: User, attributes: { exclude: ['password'] } }],
     });
 
     if (repairs.status === 'canceled') {

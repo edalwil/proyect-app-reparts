@@ -3,5 +3,6 @@
   "arrowWidth": "avoid",
   "singleQuote": true,
   "semi": true,
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "quoteProps": "as-needed"
 }

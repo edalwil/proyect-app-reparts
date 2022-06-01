@@ -19,6 +19,10 @@ const Repairs = db.define('repairs', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  imgPath: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   status: {
     type: DataTypes.STRING,
     defaultValue: 'pending',

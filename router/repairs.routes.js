@@ -23,11 +23,20 @@ const {
   deleteUser,
 } = require('../controllers/repairs.controller');
 
+//utils 
+const { upload } = require('../utils/multer');
+
 //cramos una variable con otro nombre de app
 const router = express.Router();
 
 //crear reparaciones
-router.post('/', createRepairsValidation, ckeckValidator, createRepairs);
+router.post(
+  '/',
+  upload.single("imgPath"),
+  createRepairsValidation,
+  ckeckValidator,
+  createRepairs
+);
 
 //aplicar validateToken a todos los router
 router.use(validatorToken, validateEmployees);

@@ -1,7 +1,13 @@
-const { User } = require('../models/user.model'); //importamos user de models
+//librerias
 const bcrypt = require('bcryptjs'); //importamos bcrypt
-const { AppError } = require('../utils/appError');
 const jwt = require('jsonwebtoken');
+
+//models
+const { User } = require('../models/user.model'); //importamos user de models
+
+//utlis
+const { AppError } = require('../utils/appError');
+const { Email } = require('../utils/email');
 
 //listado de usuarios
 const getAllUser = async (req, res, next) => {
@@ -85,6 +91,8 @@ const createUser = async (req, res, next) => {
       password: hashPassword,
       role,
     });
+
+    await new Email(newUser.email).sendWelcome(newUser.name);
 
     newUser.password = undefined;
 
