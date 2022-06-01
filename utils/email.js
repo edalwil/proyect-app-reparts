@@ -9,26 +9,27 @@ class Email {
   }
 
   // creat una conexion con un email servicio
-  createTransport() {
+
+  newTransport() {
+    if (process.env.NODE_ENV !== 'production') {
+      return nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: 'apiKey',
+          pass: process.env.SENDGRID_API_KEY,
+        },
+      });
+    }
+
     return nodemailer.createTransport({
-      service: 'SendGrid',
+      host: 'smtp.mailtrap.io',
+      port: 2525,
       auth: {
-        user: 'apiKey',
-        pass: process.env.SENDGRID_API_KEY,
+        user: process.env.MAILTRAP_USER,
+        pass: process.env.MAILTRAP_PASS,
       },
     });
   }
-
-  // createTransport() {
-  //   return nodemailer.createTransport({
-  //     host: 'smtp.mailtrap.io',
-  //     port: 2525,
-  //     auth: {
-  //       user: process.env.MAILTRAP_USER,
-  //       pass: process.env.MAILTRAP_PASS,
-  //     },
-  //   });
-  // }
 
   //envia el correo
   async send(template, subject, emailData) {
@@ -47,7 +48,7 @@ class Email {
 
   //enviar un correo de bienvenida cuando crea la cuenta
   async sendWelcome(name) {
-    await this.send('welcome', 'New account', { name });
+    await this.send('welcome', 'New account', { name: name });
   }
 
   //enviar un correo con cuando la reparacion cambia de status
@@ -56,7 +57,7 @@ class Email {
   }
 
   //enviar un correo cuando el servicio fue cancelado
-  async sendStatusNoticiaCanceled() {
+  async sendStatusNoticiaCanceled(name) {
     await this.send('statusCanceled', 'status App-repairs', { name: name });
   }
 }
